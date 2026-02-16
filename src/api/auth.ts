@@ -3,6 +3,7 @@ import type {
   AuthApiResponse,
   ForgotPasswordResponse,
   LoginCredentials,
+  ResetPasswordResponse,
   SignupCredentials,
   VerifyEmailResponse,
   Workspace,
@@ -39,6 +40,14 @@ export async function logout(): Promise<void> {
  */
 export async function forgotPassword(email: string): Promise<ForgotPasswordResponse> {
   const res = await apiPost<ForgotPasswordResponse>(`${AUTH_BASE}/forgot-password`, { email })
+  return res
+}
+
+/**
+ * Set new password using the token from the reset link.
+ */
+export async function resetPassword(token: string, password: string): Promise<ResetPasswordResponse> {
+  const res = await apiPost<ResetPasswordResponse>(`${AUTH_BASE}/reset-password`, { token, password })
   return res
 }
 

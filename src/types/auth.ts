@@ -49,3 +49,7 @@ export interface ForgotPasswordResponse {
 export interface VerifyEmailResponse {
   message: string
 }
+
+export interface ResetPasswordResponse {
+  message: string
+}

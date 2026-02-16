@@ -49,7 +49,7 @@ export function ForgotPasswordPage() {
                 </div>
                 <CardTitle className="text-display font-bold">Check your email</CardTitle>
                 <CardDescription className="text-muted-foreground">
-                  If an account exists for that address, we’ve sent a password reset link.
+                  If an account exists for that address, we’ve sent a link to set a new password. Check your inbox and click the link to continue.
                 </CardDescription>
               </>
             ) : (

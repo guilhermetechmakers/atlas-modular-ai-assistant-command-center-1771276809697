@@ -41,10 +41,22 @@ export const forgotPasswordSchema = z.object({
   email: z.string().email('Invalid email'),
 })
 
+export const resetPasswordSchema = z
+  .object({
+    token: z.string().min(1, 'Reset link is invalid or expired'),
+    password: passwordSchema,
+    confirmPassword: z.string().min(1, 'Confirm your password'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  })
+
 export type LoginFormData = z.infer<typeof loginSchema>
 export type SignupFormData = z.infer<typeof signupSchema>
 export type AdminLoginFormData = z.infer<typeof adminLoginSchema>
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>
+export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>
 
 /** Returns a strength label and approximate score 0–4 for UI */
 export function getPasswordStrength(password: string): { label: string; score: number } {
