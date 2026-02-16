@@ -1,7 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { RequireAuth } from '@/components/auth/require-auth'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { LandingPage } from '@/pages/landing'
 import { LoginPage } from '@/pages/auth/login'
+import { LoginManagerPage } from '@/pages/auth/login-manager'
+import { LoginAdminPage } from '@/pages/auth/login-admin'
 import { SignupPage } from '@/pages/auth/signup'
 import { ForgotPasswordPage } from '@/pages/auth/forgot-password'
 import { VerifyEmailPage } from '@/pages/auth/verify-email'
@@ -25,6 +28,8 @@ import { TermsPage } from '@/pages/legal/terms'
 export const router = createBrowserRouter([
   { path: '/', element: <LandingPage /> },
   { path: '/login', element: <LoginPage /> },
+  { path: '/login/manager', element: <LoginManagerPage /> },
+  { path: '/login/admin', element: <LoginAdminPage /> },
   { path: '/signup', element: <SignupPage /> },
   { path: '/forgot-password', element: <ForgotPasswordPage /> },
   { path: '/verify-email', element: <VerifyEmailPage /> },
@@ -33,7 +38,11 @@ export const router = createBrowserRouter([
   { path: '/terms', element: <TermsPage /> },
   {
     path: '/dashboard',
-    element: <DashboardLayout />,
+    element: (
+      <RequireAuth>
+        <DashboardLayout />
+      </RequireAuth>
+    ),
     children: [
       { index: true, element: <DashboardOverview /> },
       { path: 'projects', element: <ProjectsPage /> },

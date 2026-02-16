@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
   FolderGit2,
@@ -12,9 +12,11 @@ import {
   ChevronRight,
   Shield,
   HelpCircle,
+  LogOut,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useAuthOptional } from '@/contexts/auth-context'
 
 const SIDEBAR_STORAGE_KEY = 'atlas-sidebar-collapsed'
 
@@ -50,6 +52,9 @@ export function AppSidebar({
   onMobileClose,
   isMobile = false,
 }: AppSidebarProps) {
+  const navigate = useNavigate()
+  const auth = useAuthOptional()
+
   const navItem = (to: string, label: string, icon: typeof LayoutDashboard) => {
     const Icon = icon
     return (
@@ -105,6 +110,27 @@ export function AppSidebar({
         <div className="my-2 border-t border-border" />
         {bottomNav.map(({ to, label, icon }) => navItem(to, label, icon))}
         {adminNav.map(({ to, label, icon }) => navItem(to, label, icon))}
+        {auth?.isAuthenticated && (
+          <>
+            <div className="my-2 border-t border-border" />
+            <Button
+              variant="ghost"
+              className={cn(
+                'w-full justify-start gap-3 rounded-lg px-3 py-2.5 text-body font-medium text-muted-foreground hover:text-foreground hover:bg-muted',
+                collapsed && 'justify-center px-0'
+              )}
+              onClick={() => {
+                auth.logout()
+                navigate('/', { replace: true })
+                if (isMobile) onMobileClose?.()
+              }}
+              aria-label="Log out"
+            >
+              <LogOut className="h-5 w-5 shrink-0" />
+              {!collapsed && <span>Log out</span>}
+            </Button>
+          </>
+        )}
       </nav>
     </aside>
   )
