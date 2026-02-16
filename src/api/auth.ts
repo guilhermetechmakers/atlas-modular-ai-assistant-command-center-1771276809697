@@ -76,6 +76,19 @@ export async function adminLogin(credentials: LoginCredentials & { totpCode?: st
 }
 
 /**
+ * Fetch current user/session (e.g. to refresh after email verification).
+ * Returns null if not authenticated or endpoint not available.
+ */
+export async function getCurrentUser(): Promise<AuthApiResponse | null> {
+  try {
+    const res = await apiGet<AuthApiResponse>(`${AUTH_BASE}/me`)
+    return res
+  } catch {
+    return null
+  }
+}
+
+/**
  * Get OAuth authorization URL for a provider (GitHub, Google).
  * Frontend redirects to this URL; callback is handled by backend.
  */

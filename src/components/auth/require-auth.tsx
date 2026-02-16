@@ -8,8 +8,8 @@ interface RequireAuthProps {
 }
 
 /**
- * Protects dashboard (or any) routes: redirects to login if no session.
- * When backend is not available, auth may be skipped for demo (session in localStorage).
+ * Protects dashboard (or any) routes: redirects to login if no session,
+ * and to verify-email if session exists but email is not verified.
  */
 export function RequireAuth({ children, loginPath = '/login' }: RequireAuthProps) {
   const auth = useAuthOptional()
@@ -25,6 +25,15 @@ export function RequireAuth({ children, loginPath = '/login' }: RequireAuthProps
   }
   if (!auth.session) {
     return <Navigate to={loginPath} state={{ from: location }} replace />
+  }
+  if (!auth.isEmailVerified) {
+    return (
+      <Navigate
+        to="/verify-email"
+        state={{ from: location, email: auth.user?.email }}
+        replace
+      />
+    )
   }
   return <>{children}</>
 }

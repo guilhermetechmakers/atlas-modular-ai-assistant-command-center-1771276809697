@@ -16,12 +16,16 @@ interface AuthContextValue {
   workspaces: Workspace[]
   isLoading: boolean
   isAuthenticated: boolean
+  /** True only when user exists and emailVerified === true */
+  isEmailVerified: boolean
   login: (email: string, password: string) => Promise<AuthApiResponse>
   signup: (email: string, password: string, workspaceName: string, name?: string) => Promise<AuthApiResponse>
   logout: () => Promise<void>
   selectWorkspace: (workspace: Workspace) => void
   setSession: (session: Session | null) => void
   setSessionFromResponse: (res: AuthApiResponse) => void
+  /** Re-fetch current user/session (e.g. after email verification). */
+  refreshSession: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -118,6 +122,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [setSession]
   )
 
+  const refreshSession = useCallback(async () => {
+    const res = await authApi.getCurrentUser()
+    if (res) setSession(sessionFromResponse(res))
+  }, [setSession])
+
   const value: AuthContextValue = {
     session,
     user: session?.user ?? null,
@@ -125,12 +134,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     workspaces: session?.workspaces ?? [],
     isLoading,
     isAuthenticated: !!session?.user,
+    isEmailVerified: session?.user?.emailVerified === true,
     login,
     signup,
     logout,
     selectWorkspace,
     setSession,
     setSessionFromResponse,
+    refreshSession,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

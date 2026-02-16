@@ -8,6 +8,7 @@ import {
   Wallet,
   Bot,
   Settings,
+  User,
   ChevronLeft,
   ChevronRight,
   Shield,
@@ -32,6 +33,7 @@ const mainNav = [
 
 const bottomNav = [
   { to: '/dashboard/settings', label: 'Settings', icon: Settings },
+  { to: '/dashboard/profile', label: 'Profile', icon: User },
   { to: '/help', label: 'Help', icon: HelpCircle },
 ]
 

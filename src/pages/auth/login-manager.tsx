@@ -45,6 +45,11 @@ export function LoginManagerPage() {
         setPendingResponse(res)
       } else {
         setSession(sessionFromResponse(res))
+        if (res.user.emailVerified === false) {
+          navigate('/verify-email', { state: { from: { pathname: from }, email: res.user.email }, replace: true })
+          toast.info('Please verify your email to continue')
+          return
+        }
         toast.success('Welcome back')
         navigate(from, { replace: true })
       }
@@ -73,6 +78,11 @@ export function LoginManagerPage() {
     const session: Session = { ...sessionFromResponse(pendingResponse), workspace: ws }
     setSession(session)
     setPendingResponse(null)
+    if (pendingResponse.user.emailVerified === false) {
+      navigate('/verify-email', { state: { from: { pathname: from }, email: pendingResponse.user.email }, replace: true })
+      toast.info('Please verify your email to continue')
+      return
+    }
     toast.success('Workspace selected')
     navigate(from, { replace: true })
   }

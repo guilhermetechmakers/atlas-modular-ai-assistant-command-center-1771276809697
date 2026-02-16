@@ -43,7 +43,12 @@ export function LoginPage() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await login(data.email, data.password)
+      const res = await login(data.email, data.password)
+      if (res.user.emailVerified === false) {
+        navigate('/verify-email', { state: { from: { pathname: from }, email: res.user.email }, replace: true })
+        toast.info('Please verify your email to continue')
+        return
+      }
       toast.success('Welcome back')
       navigate(from, { replace: true })
     } catch (err) {

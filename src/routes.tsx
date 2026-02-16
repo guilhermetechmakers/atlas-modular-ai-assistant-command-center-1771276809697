@@ -18,6 +18,7 @@ import { CalendarPage } from '@/pages/dashboard/calendar'
 import { FinancePage } from '@/pages/dashboard/finance'
 import { AgentsPage } from '@/pages/dashboard/agents'
 import { SettingsPage } from '@/pages/dashboard/settings'
+import { ProfilePage } from '@/pages/dashboard/profile'
 import { AdminPage } from '@/pages/dashboard/admin'
 import { AuditPage } from '@/pages/dashboard/audit'
 import { HelpPage } from '@/pages/help'
@@ -55,6 +56,7 @@ export const router = createBrowserRouter([
       { path: 'finance', element: <FinancePage /> },
       { path: 'agents', element: <AgentsPage /> },
       { path: 'settings', element: <SettingsPage /> },
+      { path: 'profile', element: <ProfilePage /> },
       { path: 'admin', element: <AdminPage /> },
       { path: 'audit', element: <AuditPage /> },
     ],

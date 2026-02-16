@@ -47,7 +47,12 @@ export function SignupPage() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await signup(data.email, data.password, data.workspace, data.name || undefined)
+      const res = await signup(data.email, data.password, data.workspace, data.name || undefined)
+      if (res.user.emailVerified === false) {
+        navigate('/verify-email', { state: { email: res.user.email }, replace: true })
+        toast.info('Please verify your email to continue')
+        return
+      }
       toast.success('Account created. Welcome to Atlas!')
       navigate('/dashboard', { replace: true })
     } catch (err) {
