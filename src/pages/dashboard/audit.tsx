@@ -2,12 +2,20 @@ import { FileText } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 
 export function AuditPage() {
   const isLoading = false
 
   return (
     <div className="space-y-6 animate-fade-in">
+      <Breadcrumb
+        items={[
+          { label: 'Dashboard', to: '/dashboard' },
+          { label: 'Audit log' },
+        ]}
+        className="mb-2"
+      />
       <div>
         <h1 className="text-display font-bold text-foreground">Audit log</h1>
         <p className="mt-1 text-body text-muted-foreground">

@@ -37,6 +37,7 @@ export function ForgotPasswordPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-1/2 -left-1/2 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-cyan/5" />
+        <div className="absolute inset-0 bg-[rgb(var(--background))]" />
       </div>
 
       <div className="w-full max-w-md animate-fade-in-up">
@@ -111,11 +112,15 @@ export function ForgotPasswordPage() {
               </form>
             )}
             {!submitted && (
-              <p className="mt-4 text-center text-caption text-muted-foreground">
+              <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-caption text-muted-foreground">
                 <Link to="/login" className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
                   Back to log in
                 </Link>
-              </p>
+                <span className="hidden sm:inline" aria-hidden>·</span>
+                <Link to="/" className="text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
+                  Back to home
+                </Link>
+              </div>
             )}
           </CardContent>
         </Card>

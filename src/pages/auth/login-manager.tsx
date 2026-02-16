@@ -239,6 +239,10 @@ export function LoginManagerPage() {
           </Button>
         </div>
         <p className="text-center text-caption text-muted-foreground pt-2">
+          <Link to="/" className="text-muted-foreground hover:text-primary hover:underline">
+            Home
+          </Link>
+          {' · '}
           <Link to="/login" className="text-primary hover:underline">
             Standard login
           </Link>

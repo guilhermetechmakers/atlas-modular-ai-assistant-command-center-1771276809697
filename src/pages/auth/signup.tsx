@@ -237,6 +237,14 @@ export function SignupPage() {
                 Log in
               </Link>
             </p>
+            <p className="text-center text-caption text-muted-foreground pt-2">
+              <Link
+                to="/"
+                className="text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+              >
+                Back to home
+              </Link>
+            </p>
           </CardContent>
         </Card>
       </div>

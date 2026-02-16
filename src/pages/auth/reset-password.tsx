@@ -173,15 +173,21 @@ export function ResetPasswordPage() {
                   Update password
                 </Button>
               </form>
-              <p className="mt-4 text-center text-caption text-muted-foreground">
+              <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-caption text-muted-foreground">
                 <Link
                   to="/login"
                   className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded inline-flex items-center gap-1.5"
                 >
-                  <ArrowLeft className="h-4 w-4" />
+                  <ArrowLeft className="h-4 w-4" aria-hidden />
                   Back to log in
                 </Link>
-              </p>
+                <Link
+                  to="/"
+                  className="text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+                >
+                  Back to home
+                </Link>
+              </div>
             </CardContent>
           </Card>
         )}

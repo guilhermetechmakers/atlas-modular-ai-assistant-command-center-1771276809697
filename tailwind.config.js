@@ -63,7 +63,7 @@ export default {
           '100%': { opacity: '1' },
         },
         'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'slide-in-left': {
@@ -73,12 +73,35 @@ export default {
         shimmer: {
           '100%': { transform: 'translateX(100%)' },
         },
+        'gradient-mesh': {
+          '0%, 100%': { opacity: '0.6', transform: 'scale(1) translate(0, 0)' },
+          '33%': { opacity: '0.8', transform: 'scale(1.05) translate(2%, 2%)' },
+          '66%': { opacity: '0.7', transform: 'scale(0.98) translate(-1%, -1%)' },
+        },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-6px)' },
+        },
       },
       animation: {
-        'fade-in': 'fade-in 0.3s ease-out',
-        'fade-in-up': 'fade-in-up 0.3s ease-out',
+        'fade-in': 'fade-in 0.3s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
         'slide-in-left': 'slide-in-left 0.3s ease-out',
         shimmer: 'shimmer 1.5s infinite',
+        'gradient-mesh': 'gradient-mesh 8s ease-in-out infinite',
+        float: 'float 4s ease-in-out infinite',
+      },
+      animationDelay: {
+        100: '100ms',
+        200: '200ms',
+        300: '300ms',
+        400: '400ms',
+        500: '500ms',
+        600: '600ms',
+        700: '700ms',
+      },
+      animationFillMode: {
+        both: 'both',
       },
     },
   },

@@ -201,6 +201,13 @@ export function LoginPage() {
 
             <div className="pt-4 border-t border-border flex flex-wrap items-center justify-center gap-3 text-caption text-muted-foreground">
               <Link
+                to="/"
+                className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+              >
+                Home
+              </Link>
+              <span aria-hidden>·</span>
+              <Link
                 to="/login/manager"
                 className="inline-flex items-center gap-1.5 text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
               >

@@ -15,6 +15,7 @@ import {
   Building2,
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -186,6 +187,14 @@ export function ProfilePage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="flex flex-col gap-2">
+        <Breadcrumb
+          items={[
+            { label: 'Dashboard', to: '/dashboard' },
+            { label: 'Settings', to: '/dashboard/settings' },
+            { label: 'Profile & workspace' },
+          ]}
+          className="mb-2"
+        />
         <Link
           to="/dashboard/settings"
           className="inline-flex items-center gap-1 text-body text-muted-foreground hover:text-foreground transition-colors w-fit"
