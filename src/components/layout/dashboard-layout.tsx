@@ -1,14 +1,26 @@
 import { useState, useCallback, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
-import { Search, Menu, FileText } from 'lucide-react'
+import { Menu, FileText } from 'lucide-react'
 import { AppSidebar, getSidebarCollapsed, setSidebarCollapsed } from '@/components/layout/app-sidebar'
+import { GlobalSearch } from '@/components/global-search/global-search'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 export function DashboardLayout() {
   const [collapsed, setCollapsed] = useState(getSidebarCollapsed)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setSearchOpen(true)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   const toggleSidebar = useCallback(() => {
     setCollapsed((c) => {
@@ -59,15 +71,7 @@ export function DashboardLayout() {
           >
             <Menu className="h-5 w-5" />
           </Button>
-          <div className="relative flex-1 max-w-2xl">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search repos, notes, events…"
-              className="pl-9 bg-muted/50"
-              aria-label="Global search"
-            />
-          </div>
+          <GlobalSearch open={searchOpen} onOpenChange={setSearchOpen} />
           <Button variant="ghost" size="sm" asChild>
             <Link to="/dashboard/audit" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
